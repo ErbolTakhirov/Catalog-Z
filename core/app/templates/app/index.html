@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Верхняя часть с баннером -->
+<div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll" data-image-src="{% static 'img/hero.jpg' %}">
+    <form class="d-flex tm-search-form" method="get" action=".">
+        <input class="form-control tm-search-input" type="search" name="query" placeholder="Поиск" aria-label="Search">
+        <button class="btn btn-outline-success tm-search-btn" type="submit">
+        <i class="fas fa-search"></i>
+    </button>
+</form>
+</div>
+
+<!-- Основной контент с объектами -->
+<div class="container mt-5 main-banner">
+    <div class="row justify-content-center">
+        {% for object in page_obj|slice:":3" %}
+        <div class="col-lg-3 col-md-4 mb-5 d-flex justify-content-center">
+            <div class="object-block item text-center">
+                <a href="{% if object.type == 'photo' %}{% url 'photo_detail' object.id %}{% else %}{% url 'video_details' object.id %}{% endif %}">
+                    <img src="{{ object.logo.url }}" alt="{{ object.title }}" class="img-fluid">
+                </a>
+                <div class="header-text font-weight-bold">
+                    <span class="category">{{ object.category }}</span>
+                </div>
+                <h6 class="font-weight-bold">{{ object.date }}</h6>
+                <h4 class="font-weight-bold">
+                    <a href="{% if object.type == 'photo' %}{% url 'photo_detail' object.id %}{% else %}{% url 'video_details' object.id %}{% endif %}" class="font-weight-bold">
+                        {{ object.title }}
+                    </a>
+                </h4>
+                <ul class="description font-weight-bold" style="display: none;">
+                    <li>Описание: <span>{{ object.description }}</span></li>
+                    <li>Просмотры: <span>{{ object.views }}</span></li>
+                </ul>
+                <div class="main-button mt-3">
+                    <a href="{% if object.type == 'photo' %}{% url 'photo_detail' object.id %}{% else %}{% url 'video_details' object.id %}{% endif %}" class="btn btn-primary font-weight-bold">Подробнее</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Пагинация -->
+<div class="row tm-mb-90">
+    <div class="col-12 d-flex justify-content-between align-items-center tm-paging-col">
+        {% if page_obj.has_previous %}
+        <a href="?page=1" class="btn btn-primary tm-btn-prev mb-2 font-weight-bold">Предыдущая</a>
+        {% else %}
+        <a href="javascript:void(0);" class="btn btn-primary tm-btn-prev mb-2 disabled font-weight-bold" aria-disabled="true">Предыдущая</a>
+        {% endif %}
+        <div class="tm-paging d-flex">
+            {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+            <a href="?page={{ num }}" class="active tm-paging-link font-weight-bold" aria-current="page">{{ num }}</a>
+            {% else %}
+            <a href="?page={{ num }}" class="tm-paging-link font-weight-bold">{{ num }}</a>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary tm-btn-next font-weight-bold">Следующая</a>
+        {% else %}
+        <a href="javascript:void(0);" class="btn btn-primary tm-btn-next disabled font-weight-bold" aria-disabled="true">Следующая</a>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+     body {
+        overflow-x: hidden;
+    }
+
+    .container {
+        max-width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    /* Стили для инпута поиска и кнопки лупы */
+    .tm-search-form {
+        display: flex;
+        align-items: center;
+    }
+
+    .tm-search-input {
+        border-radius: 20px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        font-size: 1rem;
+        margin-right: 5px;
+        width: 200px;
+    }
+
+    .tm-search-btn {
+        border-radius: 20px;
+        border: none;
+        background-color: #007bff;
+        color: #ffffff;
+        padding: 10px 20px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .tm-search-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .tm-search-btn i {
+        margin-right: 5px;
+    }
+
+    /* Стили для центрирования объектов */
+    .object-block {
+        text-align: center;
+    }
+</style>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Результаты поиска для "{{ query }}"</h2>
+    {% if results %}
+        <ul>
+            {% for object in results %}
+                <li>
+                    <a href="{% if object.type == 'photo' %}{% url 'photo_detail' object.id %}{% else %}{% url 'video_details' object.id %}{% endif %}">
+                        {{ object.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Ничего не найдено.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Контактная страница{% endblock %}
+
+{% block content %}
+<!-- Загрузка страницы -->
+
+
+<div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll" data-image-src="{% static 'img/hero.jpg' %}"></div>
+
+<div class="container-fluid tm-mt-60">
+    <div class="row tm-mb-50">
+        <div class="col-lg-4 col-12 mb-5">
+            <h2 class="tm-text-primary mb-5">Контактная информация</h2>
+            <form id="contact-form" action="" method="POST" class="tm-contact-form mx-auto">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="name" class="form-control rounded-0" placeholder="Имя" required />
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" class="form-control rounded-0" placeholder="Электронная почта" required />
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="contact-select" name="inquiry">
+                        <option value="-">Тема</option>
+                        <option value="sales">Продажи и маркетинг</option>
+                        <option value="creative">Креативный дизайн</option>
+                        <option value="uiux">UI / UX</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea rows="8" name="message" class="form-control rounded-0" placeholder="Сообщение" required></textarea>
+                </div>
+                <div class="form-group tm-text-right">
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-4 col-12 mb-5">
+            <div class="tm-address-col">
+                <h2 class="tm-text-primary mb-5">Наш адрес</h2>
+                <p class="tm-mb-50">Адрес нашего офиса: улица Примерная, дом 1, город Примеров. Мы открыты для сотрудничества и всегда рады вашим вопросам.</p>
+                <address class="tm-text-gray tm-mb-50">
+                    ул. Примерная, д. 1<br>
+                    Город Примеров, 123456
+                </address>
+                <ul class="tm-contacts">
+                    <li>
+                        <a href="mailto:info@company.com" class="tm-text-gray">
+                            <i class="fas fa-envelope"></i>
+                            Электронная почта: info@company.com
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tel:+0100200340" class="tm-text-gray">
+                            <i class="fas fa-phone"></i>
+                            Телефон: +010-020-0340
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.company.com" class="tm-text-gray">
+                            <i class="fas fa-globe"></i>
+                            Сайт: www.company.com
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-4 col-12">
+            <h2 class="tm-text-primary mb-5">Наше местоположение</h2>
+            <!-- Карта -->
+            <div class="mapouter mb-4">
+                <div class="gmap-canvas">
+                    <iframe width="100%" height="520" id="gmap-canvas"
+                        src="https://maps.google.com/maps?q=Av.+L%C3%BAcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                        frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row tm-mb-74 tm-people-row">
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-5">
+            <div class="tm-person-card">
+                <img src="{% static 'img/people-1.jpg' %}" alt="Изображение" class="mb-4 img-fluid rounded-circle">
+                <h3 class="tm-text-primary mb-4">Райан Уайт</h3>
+                <h4 class="tm-text-secondary mb-4">Главный исполнительный директор</h4>
+                <p class="mb-4">
+                    Райан отвечает за стратегическое направление компании и ее развитие. Он имеет богатый опыт в управлении и всегда стремится к новым вершинам.
+                </p>
+                <ul class="tm-social pl-0 mb-0">
+                    <li><a href="https://facebook.com" class="tm-social-link"><i class="fab fa-facebook"></i></a></li>
+                    <li><a href="https://twitter.com" class="tm-social-link"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="https://linkedin.com" class="tm-social-link"><i class="fab fa-linkedin"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-5">
+            <div class="tm-person-card">
+                <img src="{% static 'img/people-2.jpg' %}" alt="Изображение" class="mb-4 img-fluid rounded-circle">
+                <h3 class="tm-text-primary mb-4">Кэтрин Пинки</h3>
+                <h4 class="tm-text-secondary mb-4">Главный маркетолог</h4>
+                <p class="mb-4">
+                    Кэтрин занимается разработкой маркетинговых стратегий и продвижением бренда. Ее креативность и внимание к деталям помогают достигать высоких результатов.
+                </p>
+                <ul class="tm-social pl-0 mb-0">
+                    <li><a href="https://facebook.com" class="tm-social-link"><i class="fab fa-facebook"></i></a></li>
+                    <li><a href="https://twitter.com" class="tm-social-link"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="https://linkedin.com" class="tm-social-link"><i class="fab fa-linkedin"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-5">
+            <div class="tm-person-card">
+                <img src="{% static 'img/people-3.jpg' %}" alt="Изображение" class="mb-4 img-fluid rounded-circle">
+                <h3 class="tm-text-primary mb-4">Джонни Брииф</h3>
+                <h4 class="tm-text-secondary mb-4">Финансовый директор</h4>
+                <p class="mb-4">
+                    Джонни отвечает за финансовые операции компании и планирование бюджета. Его аналитические способности и опыт в финансовом управлении являются ключевыми для стабильности бизнеса.
+                </p>
+                <ul class="tm-social pl-0 mb-0">
+                    <li><a href="https://facebook.com" class="tm-social-link"><i class="fab fa-facebook"></i></a></li>
+                    <li><a href="https://twitter.com" class="tm-social-link"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="https://linkedin.com" class="tm-social-link"><i class="fab fa-linkedin"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-5">
+            <div class="tm-person-card">
+                <img src="{% static 'img/people-4.jpg' %}" alt="Изображение" class="mb-4 img-fluid rounded-circle">
+                <h3 class="tm-text-primary mb-4">Джордж Нельсон</h3>
+                <h4 class="tm-text-secondary mb-4">Креативный арт-директор</h4>
+                <p class="mb-4">
+                    Джордж отвечает за креативные проекты и художественное направление компании. Его инновационные идеи и умение видеть детали помогают создавать уникальные проекты.
+                </p>
+                <ul class="tm-social pl-0 mb-0">
+                    <li><a href="https://facebook.com" class="tm-social-link"><i class="fab fa-facebook"></i></a></li>
+                    <li><a href="https://twitter.com" class="tm-social-link"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="https://linkedin.com" class="tm-social-link"><i class="fab fa-linkedin"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div> <!-- container-fluid, tm-container-content -->
+{% endblock %}
